@@ -41,7 +41,7 @@ namespace Enigma
                     StartCoroutine(Jump(entity.normal,jumpForce,additiveJumpForce));
                 }
             }
-            if(jumping == true && entity.body.velocity.y > 0.2f)
+            if(jumping == true && entity.body.linearVelocity.y > 0.2f)
             {
                 jumping = true;
                 entity.ChangeState("Jump");
@@ -60,7 +60,7 @@ namespace Enigma
             jumping = true;
             entity.grounded = false;
             entity.rayLength = 0;
-            entity.body.velocity += dir*force;
+            entity.body.linearVelocity += dir*force;
             float startTime = Time.time;
             float time = 0;
             while(time<jumpTime && entity.grounded == false && jump.GetInput()!=0 && entity.ChangeState("Jump"))
@@ -68,7 +68,7 @@ namespace Enigma
                 if(time>0.05f)
                 {
                     entity.rayLength = rayHold/2;
-                    entity.body.velocity += dir*additiveForce*Time.fixedDeltaTime;
+                    entity.body.linearVelocity += dir*additiveForce*Time.fixedDeltaTime;
                     jumping = true;
                 }
                 time = Time.time-startTime;

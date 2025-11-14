@@ -27,7 +27,7 @@ namespace Enigma
             ChangeState("Idle");
 
             //set moving
-            if(body.velocity.sqrMagnitude > 0.1f)
+            if(body.linearVelocity.sqrMagnitude > 0.1f)
             {
                 //Debug.Log(body.velocity.sqrMagnitude);
                 moving = true;
@@ -46,9 +46,9 @@ namespace Enigma
                 }
             }
 
-            if(moving == false && grounded == true && body.velocity != Vector3.zero)
+            if(moving == false && grounded == true && body.linearVelocity != Vector3.zero)
             {
-                body.velocity = Vector3.zero;
+                body.linearVelocity = Vector3.zero;
             }
         }
     }
