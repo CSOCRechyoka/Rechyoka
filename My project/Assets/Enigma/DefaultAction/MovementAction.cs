@@ -76,6 +76,10 @@ namespace Enigma
             if(entity.GetState() == "Walking")
             {
                 float velocity = entity.body.linearVelocity.magnitude;
+                if(velocity < 1f)
+                {
+                    forwardDir = dir;
+                }
                 float accelerationRatio = 1-(velocity/moveSpeed);
 
                 activeMoveSpeed += accel*accelerationRatio*Time.fixedDeltaTime;
