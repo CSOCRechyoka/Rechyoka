@@ -773,6 +773,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1390538339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3803814134950606028, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+  m_PrefabInstance: {fileID: 8284951108163733700}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1390538341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390538339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2f78fdcd55120418a19c8222195f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1548053961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,6 +1041,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 4065202208826905002, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4629552425648936161, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1076,6 +1097,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8629566033881902048, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1861559872}
+    - targetCorrespondingSourceObject: {fileID: 3803814134950606028, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1390538341}
     - targetCorrespondingSourceObject: {fileID: 785952950747334455, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 954075177}
