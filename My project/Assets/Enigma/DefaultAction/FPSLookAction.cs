@@ -37,12 +37,13 @@ namespace Enigma
             hor = horizontal.GetInput();
             ver = vertical.GetInput();
             StartCoroutine(Turn(hor,ver));
-        }
-
-        void FixedUpdate()
-        {
             transform.position = orbitTarget.position;
         }
+
+        // void FixedUpdate()
+        // {
+        //     transform.position = orbitTarget.position;
+        // }
 
         Vector3 lookVelocity;
         IEnumerator Look(Transform target, float time)
@@ -57,18 +58,16 @@ namespace Enigma
         Vector2 angles;
         IEnumerator Turn(float turnX,float turnY)
         {
-            angles.x = Mathf.SmoothDamp(angles.x,turnX*turnSpeed,ref turnVelo.x,turnTime, 180, Time.fixedDeltaTime);
+            angles.x = Mathf.SmoothDamp(angles.x,turnX*turnSpeed,ref turnVelo.x,turnTime, 180, Time.deltaTime);
             Quaternion xRot = Quaternion.AngleAxis(angles.x,Vector3.up);
             transform.forward = 
                 xRot * transform.forward;
 
-            angles.y = Mathf.SmoothDamp(angles.y,-turnY*turnSpeed,ref turnVelo.y,turnTime, 180, Time.fixedDeltaTime);
+            angles.y = Mathf.SmoothDamp(angles.y,-turnY*turnSpeed,ref turnVelo.y,turnTime, 180, Time.deltaTime);
             Quaternion yRot = Quaternion.AngleAxis(angles.y,transform.right);
             transform.forward = yRot*transform.forward;
             
-            Debug.Log(turnX + " " + angles.x);
-            
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 }

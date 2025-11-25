@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d38deee3f2ce1a241bffcf8dd76e0917, type: 2}
+  m_Motion: {fileID: -8945691123924629249, guid: 25d12888c7071ed45aed7b6de962ce52, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -63,7 +63,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1810068767151422176}
-    m_Position: {x: 290, y: 110, z: 0}
+    m_Position: {x: 290, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4905292591751273433}
     m_Position: {x: 300, y: -40, z: 0}
@@ -101,10 +101,28 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: Facing
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
     m_StateMachine: {fileID: -961258073262600506}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: -1
+    m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Weapon
+    m_StateMachine: {fileID: 2479305306999005952}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -121,7 +139,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature_ViewmodelTest
+  m_Name: Default
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -134,12 +152,31 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6b35dc7ef7d025b4f8b82db35a385cf1, type: 2}
+  m_Motion: {fileID: -2749735204775763041, guid: 25d12888c7071ed45aed7b6de962ce52, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1107 &2479305306999005952
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Weapon
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
 --- !u!206 &4037989575136275610
 BlendTree:
   m_ObjectHideFlags: 1
@@ -149,7 +186,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 17b5c6a33fd883842b9455ab11d45096, type: 2}
+    m_Motion: {fileID: 8349542763059015795, guid: 25d12888c7071ed45aed7b6de962ce52, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -157,17 +194,33 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 52399a2a26d733c47ad20f07aa5df58b, type: 2}
+    m_Motion: {fileID: -7551964380084998518, guid: 25d12888c7071ed45aed7b6de962ce52, type: 3}
     m_Threshold: 0.1
-    m_Position: {x: 0, y: 0}
+    m_Position: {x: 0, y: 9.52381}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
-  m_BlendParameter: Velocity
-  m_BlendParameterY: Blend
+  - serializedVersion: 2
+    m_Motion: {fileID: -4360595759470558883, guid: 25d12888c7071ed45aed7b6de962ce52, type: 3}
+    m_Threshold: 0.2
+    m_Position: {x: -6.734352, y: 6.734352}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Grounded
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 3310861661771922533, guid: 25d12888c7071ed45aed7b6de962ce52, type: 3}
+    m_Threshold: 0.3
+    m_Position: {x: 6.734352, y: 6.734352}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Grounded
+    m_Mirror: 0
+  m_BlendParameter: Facing
+  m_BlendParameterY: Velocity
   m_MinThreshold: 0
-  m_MaxThreshold: 0.1
+  m_MaxThreshold: 0.3
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 0
+  m_BlendType: 2
