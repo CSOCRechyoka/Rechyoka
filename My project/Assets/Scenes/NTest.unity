@@ -1357,18 +1357,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: turnSpeed
-      value: 24
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: walkSpeed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: sprintSpeed
-      value: 12
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: deceleration
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: walkAcceleration
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: sprintAcceleration
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1867125392642602448, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
