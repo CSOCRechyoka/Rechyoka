@@ -921,6 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32385b754c81a0c4ab8c675c5bfd821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   entity: {fileID: 649405151}
 --- !u!1 &1548053961
 GameObject:
@@ -1006,7 +1007,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 25, y: -12.5}
-  m_SizeDelta: {x: 250, y: 100}
+  m_SizeDelta: {x: 260, y: 125}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1629839262
 MonoBehaviour:
@@ -1061,9 +1062,9 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1357,7 +1358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: turnSpeed
-      value: 60
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: walkSpeed
@@ -1371,6 +1372,10 @@ PrefabInstance:
       propertyPath: deceleration
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: stateAnimator
+      value: 
+      objectReference: {fileID: 1390538344}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: walkAcceleration
       value: 24
@@ -1395,6 +1400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 3856291405595177818, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: stateAnimator
+      value: 
+      objectReference: {fileID: 1390538344}
     - target: {fileID: 4065202208826905002, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1442,6 +1451,18 @@ PrefabInstance:
     - target: {fileID: 6673528144135983363, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336348323087473071, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: currentState.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336348323087473071, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: 'currentState.Array.data[0]'
+      value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336348323087473071, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: 'currentState.Array.data[1]'
+      value: Idle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

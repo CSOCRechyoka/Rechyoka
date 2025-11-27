@@ -9,8 +9,8 @@ namespace Enigma
         [Header("Entity")]
 
         [SerializeField]
-        private string currentState = "Idle";
-        private string previousState;
+        private string[] currentState = new string[25];// = "Idle";
+        private string[] previousState = new string[25];
         [System.NonSerialized]
         public bool actionLock = false;
 
@@ -21,28 +21,31 @@ namespace Enigma
 
         void LateUpdate()
         {
-            previousState = currentState;
+            for(int i=0; i<currentState.Length; i++)
+            {
+                previousState[i] = currentState[i];
+            }
         }
 
         public bool ChangeState(
-            string state, string requiredState = null, bool overrideLock = false)
+            string state, string requiredState = null, bool overrideLock = false, int layerIndex = 0)
         {
             if(actionLock == true && overrideLock == false)
                 return false;
             if(requiredState != GetState() && requiredState != null)
                 return false;
-            currentState = state;
+            currentState[layerIndex] = state;
             return true;
         }
 
-        public string GetState()
+        public string GetState(int layerIndex = 0)
         {
-            return currentState;
+            return currentState[layerIndex];
         }
 
-        public string GetPreviousSate()
+        public string GetPreviousSate(int layerIndex = 0)
         {
-            return previousState;
+            return previousState[layerIndex];
         }
     }
 }
