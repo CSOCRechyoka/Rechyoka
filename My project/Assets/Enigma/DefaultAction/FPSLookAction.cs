@@ -60,13 +60,28 @@ namespace Enigma
         {
             angles.x = Mathf.SmoothDamp(angles.x,turnX*turnSpeed,ref turnVelo.x,turnTime, 180, Time.deltaTime);
             Quaternion xRot = Quaternion.AngleAxis(angles.x,Vector3.up);
+            
             transform.forward = 
-                xRot * transform.forward;
+                    xRot * transform.forward;
 
             angles.y = Mathf.SmoothDamp(angles.y,-turnY*turnSpeed,ref turnVelo.y,turnTime, 180, Time.deltaTime);
             Quaternion yRot = Quaternion.AngleAxis(angles.y,transform.right);
-            transform.forward = yRot*transform.forward;
-            
+
+            //Clamp
+            Vector3 planeFwd = Vector3.ProjectOnPlane(transform.forward,Vector3.up).normalized;
+            float yPredicted = Vector3.SignedAngle(planeFwd,yRot * transform.forward,transform.right);
+            Debug.Log(yPredicted);
+
+            if(yPredicted < angleClamp.x || yPredicted > angleClamp.y)
+            {
+                Quaternion clampedYRot = yPredicted < angleClamp.x ? Quaternion.AngleAxis(angleClamp.x,transform.right) : Quaternion.AngleAxis(angleClamp.y,transform.right) ;
+                transform.forward = Vector3.Slerp(clampedYRot * planeFwd,yRot * transform.forward,0.5f);
+            }    
+            else
+            {
+                transform.forward = yRot*transform.forward;
+            }
+
             yield return null;
         }
     }

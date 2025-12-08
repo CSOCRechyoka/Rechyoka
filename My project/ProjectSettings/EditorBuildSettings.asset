@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/NTest.unity
+    guid: 2594ca5aa9a5c9f26a38260842eea0f6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
