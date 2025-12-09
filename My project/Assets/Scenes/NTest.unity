@@ -713,8 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9525f6a6c60acfc47b723ca88587a0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
-  idk: {fileID: 0}
 --- !u!1 &954075174 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 785952950747334455, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
@@ -1381,7 +1379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: walkSpeed
-      value: 6
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: sprintSpeed
@@ -1397,7 +1395,7 @@ PrefabInstance:
       objectReference: {fileID: 1390538344}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: walkAcceleration
-      value: 24
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 926331270914647494, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: sprintAcceleration
@@ -1414,6 +1412,14 @@ PrefabInstance:
     - target: {fileID: 1867125392642602448, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: m_AllowDynamicResolution
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550494835321616593, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: angleClamp.x
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550494835321616593, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
+      propertyPath: angleClamp.y
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3672685824364227855, guid: 1f97845b19dba8c41819d06737d73f7a, type: 3}
       propertyPath: m_Name

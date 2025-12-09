@@ -70,7 +70,7 @@ namespace Enigma
             //Clamp
             Vector3 planeFwd = Vector3.ProjectOnPlane(transform.forward,Vector3.up).normalized;
             float yPredicted = Vector3.SignedAngle(planeFwd,yRot * transform.forward,transform.right);
-            Debug.Log(yPredicted);
+            //Debug.Log(yPredicted);
 
             if(yPredicted < angleClamp.x || yPredicted > angleClamp.y)
             {

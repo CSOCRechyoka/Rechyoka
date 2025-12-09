@@ -44,75 +44,68 @@ namespace Enigma
             inputDir = Vector3.ProjectOnPlane(inputDir,Vector3.up);
             if(entity.grounded == true)
             {
+                    entity.body.useGravity = false;
                     if(inputDir.sqrMagnitude>0.1f && entity.ChangeState("Walking")) //Accelerating
                     {
                         if(sprint.GetInput()!=0) //Sprinting
                         {
-                            Walk(inputDir, sprintSpeed, sprintAcceleration, turnSpeed);
+                            Walk(inputDir, sprintSpeed, sprintAcceleration);
                         }
-                        else
+                        else //Walking
                         {
-                            Walk(inputDir, walkSpeed, walkAcceleration, turnSpeed);
+                            Walk(inputDir, walkSpeed, walkAcceleration);
                         }
                     }
                     else if(entity.body.linearVelocity.sqrMagnitude>0.1f && entity.ChangeState("Walking")) //Decelerating
                     {
-                        Vector3 decelerationForce = entity.body.linearVelocity * deceleration * Time.fixedDeltaTime;
-                        entity.body.linearVelocity -= decelerationForce;
+                        Stop(deceleration);
                     }
             }
             else if(entity.grounded == false)
             {
+                entity.body.useGravity = true;
                 if(inputDir != Vector3.zero && entity.ChangeState("Gliding"))
                 {
-                    Glide(inputDir,walkSpeed,turnSpeed);
+                    Debug.Log("asdasdas");
+                    Glide(inputDir,walkSpeed,walkAcceleration);
                 }
             }
             activeMoveSpeed = Vector3.ProjectOnPlane(entity.body.linearVelocity,Vector3.up).magnitude;
         }
 
-        void Walk(Vector3 dir, float moveSpeed, float accel, float turnSpeed)
+        void Walk(Vector3 dir, float moveSpeed, float accel)
         {
             if(entity.GetState() == "Walking")
             {
                 float velocity = entity.body.linearVelocity.magnitude;
-                if(velocity < 1f)
-                {
-                    forwardDir = dir;
-                }
-                float accelerationRatio = 1-(velocity/moveSpeed);
+                float accelerationRatio = (moveSpeed - (Mathf.Pow(velocity,2)/moveSpeed))/moveSpeed;
+                Debug.Log(accel*accelerationRatio);
+                velocity += accel * accelerationRatio * Time.fixedDeltaTime;
 
-                activeMoveSpeed += accel*accelerationRatio*Time.fixedDeltaTime;
+                float angleReduction = (180-Mathf.Pow(Vector3.Angle(entity.body.linearVelocity,dir),2)/180)/180;
+                velocity *= angleReduction;     
 
-                float turnAngle = Vector3.SignedAngle(forwardDir,dir,Vector3.up);
-                float finalTurnAngle = turnAngle * Time.fixedDeltaTime * turnSpeed;
-                finalTurnAngle = Mathf.Abs(finalTurnAngle) > Mathf.Abs(turnAngle) ? turnAngle * Time.fixedDeltaTime : finalTurnAngle;
-                forwardDir = Quaternion.AngleAxis(finalTurnAngle, Vector3.up) * forwardDir;
-                forwardDir = forwardDir.normalized;
-
-                activeMoveSpeed -= Mathf.Abs(finalTurnAngle) * deceleration * activeMoveSpeed * .1f * Time.fixedDeltaTime;
-
-                Vector3 applyVelo = new Vector3(forwardDir.x*activeMoveSpeed,entity.body.linearVelocity.y,forwardDir.z*activeMoveSpeed);
-                entity.body.linearVelocity = applyVelo;
-                transform.forward = forwardDir;
+                entity.body.linearVelocity = dir.normalized * velocity;
             }
         }
 
-
-        void Glide(Vector3 dir, float moveSpeed, float turnSpeed)
+        void Stop(float deceleration)
         {
-            moveSpeed = moveSpeed*moveSpeed*2/entity.body.linearVelocity.magnitude;
-            entity.body.linearVelocity += dir * moveSpeed * Time.fixedDeltaTime;
+            entity.body.linearVelocity -= entity.body.linearVelocity * deceleration * Time.fixedDeltaTime;
+            Debug.Log("STopp");
+        }
 
-            Vector3 planeVelo = Vector3.ProjectOnPlane(entity.body.linearVelocity, Vector3.up);
-            float turnAngle = Vector3.SignedAngle(forwardDir,planeVelo,Vector3.up);
-            float finalTurnAngle = turnAngle * Time.fixedDeltaTime * turnSpeed;
-            finalTurnAngle = Mathf.Abs(finalTurnAngle) > Mathf.Abs(turnAngle) ? turnAngle : finalTurnAngle;
+        void Glide(Vector3 dir, float moveSpeed, float accel)
+        {
+            Vector3 projVelocity = Vector3.ProjectOnPlane(entity.body.linearVelocity,Vector3.up);
+            float velocity = projVelocity.magnitude;
+            float accelerationRatio = moveSpeed - (Mathf.Pow(velocity,2)*Vector3.Dot(projVelocity,dir)/moveSpeed);
+            velocity = accel * accelerationRatio * Time.fixedDeltaTime;
 
-            forwardDir = Quaternion.AngleAxis(finalTurnAngle, Vector3.up) * forwardDir;
-
-            forwardDir = Vector3.ProjectOnPlane(forwardDir,Vector3.up);
-            transform.forward = forwardDir;
+            float angleReduction = (180-Mathf.Pow(Vector3.Angle(entity.body.linearVelocity,dir),2)/180)/180;
+            velocity *= angleReduction;     
+            Vector3 horVelo = dir.normalized * velocity;
+            entity.body.linearVelocity += horVelo;
         }
 
     }
