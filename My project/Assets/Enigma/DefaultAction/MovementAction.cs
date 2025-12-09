@@ -79,13 +79,14 @@ namespace Enigma
             {
                 float velocity = entity.body.linearVelocity.magnitude;
                 float accelerationRatio = (moveSpeed - (Mathf.Pow(velocity,2)/moveSpeed))/moveSpeed;
-                Debug.Log(accel*accelerationRatio);
-                velocity += accel * accelerationRatio * Time.fixedDeltaTime;
+                float angle = Vector3.Angle(entity.body.linearVelocity,dir);
+                float angleReduction = (180-Mathf.Pow(angle,2)/180)/180;
 
-                float angleReduction = (180-Mathf.Pow(Vector3.Angle(entity.body.linearVelocity,dir),2)/180)/180;
+                velocity += accel * accelerationRatio * angleReduction * Time.fixedDeltaTime;
                 velocity *= angleReduction;     
 
-                entity.body.linearVelocity = dir.normalized * velocity;
+                Vector3 moveDir = Vector3.Lerp(entity.body.linearVelocity,dir,angleReduction);
+                entity.body.linearVelocity = moveDir.normalized * velocity;
             }
         }
 
@@ -97,15 +98,7 @@ namespace Enigma
 
         void Glide(Vector3 dir, float moveSpeed, float accel)
         {
-            Vector3 projVelocity = Vector3.ProjectOnPlane(entity.body.linearVelocity,Vector3.up);
-            float velocity = projVelocity.magnitude;
-            float accelerationRatio = moveSpeed - (Mathf.Pow(velocity,2)*Vector3.Dot(projVelocity,dir)/moveSpeed);
-            velocity = accel * accelerationRatio * Time.fixedDeltaTime;
-
-            float angleReduction = (180-Mathf.Pow(Vector3.Angle(entity.body.linearVelocity,dir),2)/180)/180;
-            velocity *= angleReduction;     
-            Vector3 horVelo = dir.normalized * velocity;
-            entity.body.linearVelocity += horVelo;
+            entity.body.linearVelocity += dir*moveSpeed*0.5f* Time.fixedDeltaTime;
         }
 
     }
