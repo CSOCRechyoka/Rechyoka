@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    /*// BULLET
+    
+    // BULLET
     public GameObject bullet;
 
     // force-urile bullet-ului
@@ -72,6 +73,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Update()
     {
         MyInput();
-    }*/
+    }
 
 }
