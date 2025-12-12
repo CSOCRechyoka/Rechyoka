@@ -59,7 +59,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         //verfica daca ray-ul a lovit ceva
         Vector3 targetpoint;
-        if(Physics.Raycast())
+        //if(Physics.Raycast())
         bulletsLeft--;
         bulletsShot++;
     }

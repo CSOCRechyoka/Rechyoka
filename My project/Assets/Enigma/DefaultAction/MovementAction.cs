@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Enigma
 {
@@ -26,10 +27,14 @@ namespace Enigma
         Vector3 forwardDir;
         float activeMoveSpeed;
 
+        //Debug
+        public TMP_Text textField;
+
         void Start()
         {
             entity = GetComponentInChildren<PhysicsEntity>();
             forwardDir = transform.forward;
+            
         }
 
         // Update is called once per frame
@@ -77,23 +82,30 @@ namespace Enigma
         {
             if(entity.GetState() == "Walking")
             {
+                entity.body.sleepThreshold = 0.0000001f;
                 float velocity = entity.body.linearVelocity.magnitude;
                 float accelerationRatio = (moveSpeed - (Mathf.Pow(velocity,2)/moveSpeed))/moveSpeed;
                 float angle = Vector3.Angle(entity.body.linearVelocity,dir);
                 float angleReduction = (180-Mathf.Pow(angle,2)/180)/180;
 
-                velocity += accel * accelerationRatio * angleReduction * Time.fixedDeltaTime;
-                velocity *= angleReduction;     
-
-                Vector3 moveDir = Vector3.Lerp(entity.body.linearVelocity,dir,angleReduction);
-                entity.body.linearVelocity = moveDir.normalized * velocity;
+                entity.body.linearVelocity += dir * accel * accelerationRatio * Time.fixedDeltaTime;
+                entity.body.linearVelocity = Vector3.Lerp(entity.body.linearVelocity,dir,angleReduction).normalized * entity.body.linearVelocity.magnitude;
+                if(entity.body.linearVelocity.magnitude < 0.25f)
+                {
+                    entity.body.linearVelocity = entity.body.linearVelocity.normalized * 0.5f;
+                }
+                entity.body.linearVelocity *= angleReduction;
+                //Debug.Log(accel * accelerationRatio * angleReduction * Time.fixedDeltaTime);
+                textField.text = (System.Math.Round(accel * accelerationRatio * angleReduction * Time.fixedDeltaTime,2)).ToString() +
+                                    "<br>" + (System.Math.Round(entity.body.linearVelocity.magnitude,2)).ToString();
+                // Vector3 moveDir = Vector3.Lerp(entity.body.linearVelocity,dir,angleReduction);
+                //entity.body.linearVelocity = moveDir.normalized * velocity;
             }
         }
 
         void Stop(float deceleration)
         {
             entity.body.linearVelocity -= entity.body.linearVelocity * deceleration * Time.fixedDeltaTime;
-            Debug.Log("STopp");
         }
 
         void Glide(Vector3 dir, float moveSpeed, float accel)
